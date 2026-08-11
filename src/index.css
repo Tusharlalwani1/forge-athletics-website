@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal: #14120F;
+  --color-charcoal-raised: #1C1A16;
+  --color-charcoal-line: #2A2721;
+  --color-chalk: #F2EFE9;
+  --color-steel: #8A8680;
+  --color-steel-dim: #5C5952;
+  --color-blaze: #E8491D;
+  --color-blaze-dim: #B83815;
+  --color-tape: #FFC53D;
+
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  --charcoal: #14120F;
+  --charcoal-raised: #1C1A16;
+  --charcoal-line: #2A2721;
+  --chalk: #F2EFE9;
+  --steel: #8A8680;
+  --steel-dim: #5C5952;
+  --blaze: #E8491D;
+  --blaze-dim: #B83815;
+  --tape: #FFC53D;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--charcoal);
+  color: var(--chalk);
+  font-family: 'Inter', sans-serif;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--charcoal);
+  color: var(--chalk);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Utility Classes as per Specification */
+.text-display {
+  font-family: 'Anton', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+}
+
+.scoreboard {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+  background-color: var(--charcoal-raised);
+  border: 1px solid var(--charcoal-line);
+}
+
+.scoreboard-value {
+  color: var(--tape);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Accessibility Focus Ring */
+:focus-visible {
+  outline: 2px solid #E8491D !important;
+  outline-offset: 2px !important;
+}
+
+/* Respect Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
