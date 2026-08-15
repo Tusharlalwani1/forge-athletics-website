@@ -66,9 +66,11 @@ export default function TransformationCarousel() {
                     style={{ scrollbarWidth: 'none' }}
                 >
                     {TRANSFORMATIONS.map((t) => (
-                        <div
+                        <motion.div
                             key={t.name}
-                            className="w-72 shrink-0 snap-start border border-charcoal-line bg-charcoal-raised p-6"
+                            whileHover={{ y: -4 }}
+                            transition={{ duration: 0.2 }}
+                            className="w-72 shrink-0 snap-start border border-charcoal-line bg-charcoal-raised p-6 transition-colors hover:border-blaze"
                         >
                             <div className="flex h-32 items-center justify-center gap-2 border border-dashed border-charcoal-line bg-charcoal text-[10px] uppercase tracking-widest text-steel-dim">
                                 <span>Before</span>
@@ -84,7 +86,7 @@ export default function TransformationCarousel() {
                                     · {t.timeframe}
                                 </span>
                             </p>
-                        </div>
+                        </motion.div>
                     ))}
                 </motion.div>
 

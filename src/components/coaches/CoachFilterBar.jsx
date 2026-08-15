@@ -34,6 +34,7 @@ export default function CoachFilterBar({ activeFilter, onFilterChange, coaches }
             type="button"
             onClick={() => handleFilter(group.id)}
             aria-pressed={isActive}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded border transition-colors duration-150 cursor-pointer focus-visible:outline-none ${
               isActive

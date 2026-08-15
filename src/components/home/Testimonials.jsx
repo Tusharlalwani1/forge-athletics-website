@@ -30,7 +30,9 @@ export default function Testimonials() {
                         <motion.div
                             key={t.name}
                             variants={fadeUp}
-                            className="border border-charcoal-line bg-charcoal p-6"
+                            whileHover={{ y: -3 }}
+                            transition={{ duration: 0.2 }}
+                            className="border border-charcoal-line bg-charcoal p-6 transition-colors hover:border-blaze/40"
                         >
                             <div className="flex gap-0.5">
                                 {Array.from({ length: t.rating }).map((_, i) => (

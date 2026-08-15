@@ -1,7 +1,12 @@
+import { Suspense, lazy } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTrialModal } from '../TrialForm/useTrialModal';
 import { EASE_OUT_EXPO } from '../../lib/motion';
+
+// Lazy-loaded so the ~500KB three.js chunk only downloads when the Home
+// page's Hero actually renders, not on every route in the app.
+const HeroBackground = lazy(() => import('./HeroBackground'));
 
 export default function Hero() {
     const { openTrialModal } = useTrialModal();
@@ -9,6 +14,12 @@ export default function Hero() {
 
     return (
         <section className="relative overflow-hidden border-b border-charcoal-line">
+            {/* Three.js ambient particle-grid — skipped automatically for reduced-motion,
+                lazy-loaded so its chunk never blocks initial page render */}
+            <Suspense fallback={null}>
+                <HeroBackground />
+            </Suspense>
+
             {/* Ambient background texture — subtle plate-loading grid, not a stock photo */}
             <div
                 aria-hidden="true"
@@ -80,7 +91,7 @@ export default function Hero() {
                     transition={{ duration: 0.6, delay: 0.15, ease: EASE_OUT_EXPO }}
                     className="lg:col-span-5"
                 >
-                    <div className="scoreboard mx-auto w-full max-w-sm rounded-lg p-6 shadow-2xl">
+                    <div className="scoreboard mx-auto w-full max-w-sm rounded-lg p-6 shadow-2xl transition-shadow duration-300 hover:shadow-blaze/10">
                         <p className="text-[10px] uppercase tracking-widest text-steel-dim">
                             Today's Board
                         </p>
@@ -90,9 +101,11 @@ export default function Hero() {
                                 { time: '12:00 PM', name: 'Open Gym', spots: 12 },
                                 { time: '05:30 PM', name: 'Olympic Lifting', spots: 5 },
                             ].map((slot) => (
-                                <div
+                                <motion.div
                                     key={slot.time}
-                                    className="flex items-center justify-between border-t border-charcoal-line pt-3 first:border-t-0 first:pt-0"
+                                    whileHover={{ x: 4 }}
+                                    transition={{ duration: 0.15 }}
+                                    className="flex cursor-default items-center justify-between border-t border-charcoal-line pt-3 first:border-t-0 first:pt-0"
                                 >
                                     <div>
                                         <p className="scoreboard-value text-lg">{slot.time}</p>
@@ -106,7 +119,7 @@ export default function Hero() {
                                             {String(slot.spots).padStart(2, '0')} left
                                         </p>
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
                         </div>
                         <Link

@@ -42,7 +42,7 @@ export default function AddOns() {
             const IconComponent = ICON_MAP[item.iconName] || Dumbbell;
 
             return (
-              <motion.div key={item.id} variants={fadeUp}>
+              <motion.div key={item.id} variants={fadeUp} whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
                 <div className="h-full rounded-lg border border-charcoal-line bg-charcoal-raised p-6 flex flex-col justify-between transition-colors hover:border-steel-dim">
                   <div>
                     <div className="flex items-center justify-between">

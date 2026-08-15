@@ -46,7 +46,7 @@ export default function ClassTypeDirectory({ selectedType, onSelectType }) {
             const isSelected = selectedType === type.id;
 
             return (
-              <motion.div key={type.id} variants={fadeUp}>
+              <motion.div key={type.id} variants={fadeUp} whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
                 <button
                   type="button"
                   onClick={() => onSelectType(type.id)}

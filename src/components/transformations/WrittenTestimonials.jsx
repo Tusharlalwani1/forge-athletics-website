@@ -36,7 +36,9 @@ export default function WrittenTestimonials() {
             <motion.div
               key={item.id}
               variants={fadeUp}
-              className="flex flex-col gap-4 rounded-lg border border-charcoal-line/60 bg-charcoal p-5"
+              whileHover={{ y: -3 }}
+              transition={{ duration: 0.2 }}
+              className="flex flex-col gap-4 rounded-lg border border-charcoal-line/60 bg-charcoal p-5 hover:border-blaze/40 transition-colors"
             >
               {/* Decorative Quote icon */}
               <Quote

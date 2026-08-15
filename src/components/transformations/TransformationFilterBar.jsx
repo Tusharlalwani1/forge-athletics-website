@@ -25,6 +25,7 @@ export default function TransformationFilterBar({ activeFilter, onFilterChange }
             type="button"
             onClick={() => onFilterChange(opt.id)}
             aria-pressed={isActive}
+            whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded border transition-colors duration-150 cursor-pointer focus-visible:outline-none ${
               isActive

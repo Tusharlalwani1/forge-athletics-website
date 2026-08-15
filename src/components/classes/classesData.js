@@ -93,7 +93,7 @@ export const TIMETABLE = [
     startTime: '12:00 PM',
     durationMins: 120,
     classTypeId: 'open-gym',
-    coachName: 'Floor Staff',
+    coachName: 'Dana West',
     spotsTotal: 20,
     spotsBooked: 6,
     status: 'scheduled'
@@ -219,7 +219,7 @@ export const TIMETABLE = [
     startTime: '12:00 PM',
     durationMins: 120,
     classTypeId: 'open-gym',
-    coachName: 'Floor Staff',
+    coachName: 'Dana West',
     spotsTotal: 20,
     spotsBooked: 4,
     status: 'scheduled'
@@ -344,7 +344,7 @@ export const TIMETABLE = [
     startTime: '12:00 PM',
     durationMins: 120,
     classTypeId: 'open-gym',
-    coachName: 'Floor Staff',
+    coachName: 'Dana West',
     spotsTotal: 20,
     spotsBooked: 8,
     status: 'scheduled'
@@ -401,7 +401,7 @@ export const TIMETABLE = [
     startTime: '12:00 PM',
     durationMins: 180,
     classTypeId: 'open-gym',
-    coachName: 'Floor Staff',
+    coachName: 'Dana West',
     spotsTotal: 25,
     spotsBooked: 10,
     status: 'scheduled'
@@ -436,7 +436,7 @@ export const TIMETABLE = [
     startTime: '11:15 AM',
     durationMins: 180,
     classTypeId: 'open-gym',
-    coachName: 'Floor Staff',
+    coachName: 'Dana West',
     spotsTotal: 25,
     spotsBooked: 12,
     status: 'scheduled'
