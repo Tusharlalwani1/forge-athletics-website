@@ -2,9 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../../lib/motion';
-import { WRITTEN_TESTIMONIALS } from './transformationsData';
+import { useTransformations } from '../../hooks/useTransformations';
 
 export default function WrittenTestimonials() {
+  const { testimonials } = useTransformations();
   return (
     <section className="mt-20 border-t border-charcoal-line pt-16">
       <motion.div
@@ -32,7 +33,7 @@ export default function WrittenTestimonials() {
           variants={staggerContainer}
           className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {WRITTEN_TESTIMONIALS.map((item) => (
+          {(testimonials || []).map((item) => (
             <motion.div
               key={item.id}
               variants={fadeUp}

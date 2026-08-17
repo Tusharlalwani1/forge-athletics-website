@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp } from 'lucide-react';
-import { TRANSFORMATIONS } from '../components/transformations/transformationsData';
+import { useTransformations } from '../hooks/useTransformations';
 import TransformationFilterBar from '../components/transformations/TransformationFilterBar';
 import TransformationGrid from '../components/transformations/TransformationGrid';
 import TransformationDetailModal from '../components/transformations/TransformationDetailModal';
@@ -10,15 +10,17 @@ import { useTrialModal } from '../components/TrialForm/useTrialModal';
 import { fadeUp } from '../lib/motion';
 
 export default function Transformations() {
+  const { transformations, testimonials } = useTransformations();
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedEntry, setSelectedEntry] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { openTrialModal } = useTrialModal();
 
   const filteredTransformations = useMemo(() => {
-    if (activeFilter === 'all') return TRANSFORMATIONS;
-    return TRANSFORMATIONS.filter((t) => t.goalType === activeFilter);
-  }, [activeFilter]);
+    const list = transformations || [];
+    if (activeFilter === 'all') return list;
+    return list.filter((t) => t.goalType === activeFilter);
+  }, [activeFilter, transformations]);
 
   const handleSelectEntry = (entry) => {
     setSelectedEntry(entry);

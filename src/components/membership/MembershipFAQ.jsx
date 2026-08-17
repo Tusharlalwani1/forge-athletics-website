@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../../lib/motion';
-import { FAQS } from './membershipData';
+import { useMembership } from '../../hooks/useMembership';
 
 export default function MembershipFAQ() {
-  const [openFaqId, setOpenFaqId] = useState(FAQS[0]?.id || null);
+  const { faqs } = useMembership();
+  const [openFaqId, setOpenFaqId] = useState(faqs?.[0]?.id || 'faq-cancel');
 
   const toggleFaq = (id) => {
     setOpenFaqId((prev) => (prev === id ? null : id));
@@ -33,7 +34,7 @@ export default function MembershipFAQ() {
         </motion.div>
 
         <div className="space-y-3">
-          {FAQS.map((faq) => {
+          {(faqs || []).map((faq) => {
             const isOpen = openFaqId === faq.id;
             const answerId = `faq-answer-${faq.id}`;
 

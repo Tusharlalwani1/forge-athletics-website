@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Dumbbell, Salad, Sparkles } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../../lib/motion';
-import { ADD_ONS } from './membershipData';
+import { useMembership } from '../../hooks/useMembership';
 import { useTrialModal } from '../TrialForm/useTrialModal';
 
 const ICON_MAP = {
@@ -12,6 +12,7 @@ const ICON_MAP = {
 };
 
 export default function AddOns() {
+  const { addOns } = useMembership();
   const { openTrialModal } = useTrialModal();
 
   return (
@@ -38,7 +39,7 @@ export default function AddOns() {
           variants={staggerContainer}
           className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3"
         >
-          {ADD_ONS.map((item) => {
+          {(addOns || []).map((item) => {
             const IconComponent = ICON_MAP[item.iconName] || Dumbbell;
 
             return (

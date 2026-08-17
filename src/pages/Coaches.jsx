@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Users } from 'lucide-react';
-import { COACHES } from '../components/coaches/coachesData';
+import { useCoaches } from '../hooks/useCoaches';
 import CoachFilterBar from '../components/coaches/CoachFilterBar';
 import CoachGrid from '../components/coaches/CoachGrid';
 import CoachDetailModal from '../components/coaches/CoachDetailModal';
@@ -20,16 +20,18 @@ const FILTER_MATCH = {
 };
 
 export default function Coaches() {
+  const { coaches } = useCoaches();
   const [activeFilter, setActiveFilter] = useState('all');
   const [selectedCoach, setSelectedCoach] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { openTrialModal } = useTrialModal();
 
   const filteredCoaches = useMemo(() => {
-    if (activeFilter === 'all') return COACHES;
+    const list = coaches || [];
+    if (activeFilter === 'all') return list;
     const matchKey = FILTER_MATCH[activeFilter] || activeFilter;
-    return COACHES.filter((c) => c.specialties.includes(matchKey) || c.specialties.includes(activeFilter));
-  }, [activeFilter]);
+    return list.filter((c) => (c.specialties || []).includes(matchKey) || (c.specialties || []).includes(activeFilter));
+  }, [activeFilter, coaches]);
 
   const handleSelectCoach = (coach) => {
     setSelectedCoach(coach);
@@ -73,7 +75,7 @@ export default function Coaches() {
         <CoachFilterBar
           activeFilter={activeFilter}
           onFilterChange={setActiveFilter}
-          coaches={COACHES}
+          coaches={coaches}
         />
 
         {/* 3. Coach Grid */}

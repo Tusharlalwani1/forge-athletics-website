@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Minus, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../../lib/motion';
-import { TIERS } from './membershipData';
+import { useMembership } from '../../hooks/useMembership';
 import { useTrialModal } from '../TrialForm/useTrialModal';
 
 export default function PricingTable({
@@ -14,6 +14,7 @@ export default function PricingTable({
   onStartCheckout,
   onResetCheckout,
 }) {
+  const { tiers } = useMembership();
   const { openTrialModal } = useTrialModal();
 
   return (
@@ -24,7 +25,7 @@ export default function PricingTable({
       viewport={{ once: true, amount: 0.1 }}
       className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-3"
     >
-      {TIERS.map((tier) => {
+      {(tiers || []).map((tier) => {
         const isFeatured = tier.featured;
         const displayPrice = tier.isPerClass
           ? tier.monthlyPrice

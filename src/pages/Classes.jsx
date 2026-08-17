@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { TIMETABLE } from '../components/classes/classesData';
+import { useClasses } from '../hooks/useClasses';
 import ClassTypeDirectory from '../components/classes/ClassTypeDirectory';
 import TimetableFilters from '../components/classes/TimetableFilters';
 import WeekView from '../components/classes/WeekView';
@@ -10,6 +10,7 @@ import { useTrialModal } from '../components/TrialForm/useTrialModal';
 import { fadeUp } from '../lib/motion';
 
 export default function Classes() {
+  const { timetable } = useClasses();
   const { openTrialModal } = useTrialModal();
   const timetableRef = useRef(null);
 
@@ -48,13 +49,13 @@ export default function Classes() {
   // Extract unique coach names from timetable data
   const coaches = useMemo(() => {
     const set = new Set();
-    TIMETABLE.forEach((slot) => {
+    (timetable || []).forEach((slot) => {
       if (slot.coachName && slot.coachName !== 'Floor Staff') {
         set.add(slot.coachName);
       }
     });
     return Array.from(set);
-  }, []);
+  }, [timetable]);
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -92,7 +93,7 @@ export default function Classes() {
 
   // Instant client-side filtered timetable
   const filteredTimetable = useMemo(() => {
-    return TIMETABLE.filter((slot) => {
+    return (timetable || []).filter((slot) => {
       // Day filter
       if (filters.day !== 'All' && slot.day !== filters.day) {
         return false;
@@ -106,7 +107,6 @@ export default function Classes() {
         return false;
       }
       // Time of day filter
-      // Time of day filter
       if (filters.timeOfDay !== 'all') {
         const isAM = slot.startTime.includes('AM');
         let hour = parseInt(slot.startTime.split(':')[0], 10);
@@ -119,7 +119,7 @@ export default function Classes() {
       }
       return true;
     });
-  }, [filters]);
+  }, [filters, timetable]);
 
   return (
     <div className="min-h-screen bg-charcoal text-chalk flex flex-col">

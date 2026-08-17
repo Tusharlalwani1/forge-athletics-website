@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Dumbbell, ShieldCheck, Flame, Activity, Unlock, HeartPulse, Clock } from 'lucide-react';
 import { fadeUp, staggerContainer } from '../../lib/motion';
-import { CLASS_TYPES } from './classesData';
+import { useClasses } from '../../hooks/useClasses';
 import { DifficultyBadge } from './DifficultyLegend';
 
 const ICON_MAP = {
@@ -15,6 +15,8 @@ const ICON_MAP = {
 };
 
 export default function ClassTypeDirectory({ selectedType, onSelectType }) {
+  const { classTypes } = useClasses();
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 border-b border-charcoal-line">
       <motion.div
@@ -41,7 +43,7 @@ export default function ClassTypeDirectory({ selectedType, onSelectType }) {
           variants={staggerContainer}
           className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {CLASS_TYPES.map((type) => {
+          {(classTypes || []).map((type) => {
             const IconComponent = ICON_MAP[type.iconName] || Dumbbell;
             const isSelected = selectedType === type.id;
 
