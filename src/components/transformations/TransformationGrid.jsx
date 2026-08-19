@@ -54,22 +54,47 @@ export default function TransformationGrid({ transformations, onSelectEntry }) {
               className="w-full h-full text-left border border-charcoal-line bg-charcoal-raised rounded-lg hover:border-blaze hover:shadow-lg hover:shadow-blaze/5 transition-all duration-200 focus-visible:outline-none cursor-pointer group flex flex-col overflow-hidden"
               aria-label={`View ${entry.name}'s full transformation story`}
             >
-              {/* Before → After Placeholder Block */}
-              <div className="flex h-40 w-full items-center justify-center gap-3 border-b border-dashed border-charcoal-line bg-charcoal">
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-steel-dim">Before</span>
-                  <div className="h-16 w-16 rounded border border-dashed border-charcoal-line bg-charcoal-raised flex items-center justify-center">
-                    <span className="text-[9px] text-steel-dim text-center leading-tight px-1">Photo<br />pending</span>
-                  </div>
+              {/* Before → After Image Block */}
+              <div className="relative flex h-48 w-full border-b border-charcoal-line bg-charcoal overflow-hidden group/img">
+                {/* Before Image */}
+                <div className="relative w-1/2 h-full overflow-hidden border-r border-charcoal-line/60">
+                  {entry.beforeImage ? (
+                    <img
+                      src={entry.beforeImage}
+                      alt={`${entry.name} before transformation`}
+                      className="h-full w-full object-cover filter grayscale brightness-90 contrast-105 group-hover/img:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center bg-charcoal text-steel-dim text-xs">Before</div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-black/30 pointer-events-none" />
+                  <span className="absolute top-2.5 left-2.5 rounded bg-charcoal/80 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-steel border border-charcoal-line backdrop-blur-sm">
+                    Before
+                  </span>
                 </div>
-                <div className="flex flex-col items-center gap-1">
-                  <ArrowRight className="h-5 w-5 text-blaze" aria-hidden="true" />
+
+                {/* Center divider icon */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rounded-full bg-charcoal-raised border border-blaze/60 p-1.5 shadow-lg shadow-black/50 text-blaze">
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </div>
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-steel-dim">After</span>
-                  <div className="h-16 w-16 rounded border border-dashed border-charcoal-line bg-charcoal-raised flex items-center justify-center">
-                    <span className="text-[9px] text-steel-dim text-center leading-tight px-1">Photo<br />pending</span>
-                  </div>
+
+                {/* After Image */}
+                <div className="relative w-1/2 h-full overflow-hidden">
+                  {entry.afterImage ? (
+                    <img
+                      src={entry.afterImage}
+                      alt={`${entry.name} after transformation`}
+                      className="h-full w-full object-cover group-hover/img:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center bg-charcoal text-steel-dim text-xs">After</div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-black/30 pointer-events-none" />
+                  <span className="absolute top-2.5 right-2.5 rounded bg-blaze/90 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-chalk shadow-sm backdrop-blur-sm">
+                    After
+                  </span>
                 </div>
               </div>
 

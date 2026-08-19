@@ -29,16 +29,21 @@ export function useTransformations() {
         if (testError) console.warn('Supabase testimonials fetch notice:', testError.message);
 
         if (transData && transData.length > 0) {
-          setTransformations(transData.map(item => ({
-            id: item.id,
-            name: item.name,
-            goalType: item.goal_type || item.goalType,
-            timeframeWeeks: item.timeframe_weeks || item.timeframeWeeks,
-            quote: item.quote,
-            fullStory: item.full_story || item.fullStory,
-            startStat: item.start_stat || item.startStat,
-            endStat: item.end_stat || item.endStat,
-          })));
+          setTransformations(transData.map((item, idx) => {
+            const fallback = FALLBACK_TRANSFORMATIONS.find(f => f.id === item.id) || FALLBACK_TRANSFORMATIONS[idx % FALLBACK_TRANSFORMATIONS.length];
+            return {
+              id: item.id,
+              name: item.name,
+              goalType: item.goal_type || item.goalType,
+              timeframeWeeks: item.timeframe_weeks || item.timeframeWeeks,
+              beforeImage: item.before_image || item.beforeImage || fallback?.beforeImage,
+              afterImage: item.after_image || item.afterImage || fallback?.afterImage,
+              quote: item.quote,
+              fullStory: item.full_story || item.fullStory,
+              startStat: item.start_stat || item.startStat,
+              endStat: item.end_stat || item.endStat,
+            };
+          }));
         }
 
         if (testData && testData.length > 0) {

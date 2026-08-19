@@ -123,26 +123,45 @@ export default function TransformationDetailModal({ entry, isOpen, onClose }) {
 
             {/* Scrollable Body */}
             <div className="p-6 overflow-y-auto flex-1 space-y-6">
-              {/* Larger Before → After Placeholder */}
-              <div className="flex items-center justify-center gap-4 rounded border border-dashed border-charcoal-line bg-charcoal p-6">
-                <div className="flex flex-col items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-steel-dim">Before</span>
-                  <div className="h-24 w-24 rounded border border-dashed border-charcoal-line bg-charcoal-raised flex items-center justify-center">
-                    <span className="text-[9px] text-steel-dim text-center leading-relaxed px-1">
-                      Member photo<br />pending consent
-                    </span>
-                  </div>
+              {/* Before → After Image Gallery */}
+              <div className="relative flex flex-col sm:flex-row h-64 sm:h-56 w-full border border-charcoal-line bg-charcoal rounded-lg overflow-hidden gap-1 p-1">
+                {/* Before Container */}
+                <div className="relative flex-1 h-1/2 sm:h-full overflow-hidden rounded bg-charcoal-raised">
+                  {entry.beforeImage ? (
+                    <img
+                      src={entry.beforeImage}
+                      alt={`${entry.name} before transformation`}
+                      className="h-full w-full object-cover filter grayscale brightness-95"
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center text-steel-dim text-xs">Before</div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent pointer-events-none" />
+                  <span className="absolute top-3 left-3 rounded bg-charcoal/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-steel border border-charcoal-line backdrop-blur-sm">
+                    Before
+                  </span>
                 </div>
-                <div className="flex flex-col items-center">
-                  <ArrowRight className="h-8 w-8 text-blaze" aria-hidden="true" />
+
+                {/* Divider Arrow */}
+                <div className="hidden sm:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 rounded-full bg-charcoal-raised border border-blaze/60 p-2 shadow-xl shadow-black/80 text-blaze">
+                  <ArrowRight className="h-4 w-4" />
                 </div>
-                <div className="flex flex-col items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-steel-dim">After</span>
-                  <div className="h-24 w-24 rounded border border-dashed border-charcoal-line bg-charcoal-raised flex items-center justify-center">
-                    <span className="text-[9px] text-steel-dim text-center leading-relaxed px-1">
-                      Member photo<br />pending consent
-                    </span>
-                  </div>
+
+                {/* After Container */}
+                <div className="relative flex-1 h-1/2 sm:h-full overflow-hidden rounded bg-charcoal-raised">
+                  {entry.afterImage ? (
+                    <img
+                      src={entry.afterImage}
+                      alt={`${entry.name} after transformation`}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center text-steel-dim text-xs">After</div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent pointer-events-none" />
+                  <span className="absolute top-3 right-3 rounded bg-blaze px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-chalk shadow-md backdrop-blur-sm">
+                    After
+                  </span>
                 </div>
               </div>
 
